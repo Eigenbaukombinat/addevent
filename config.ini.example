@@ -1,0 +1,2 @@
+[DEFAULT]
+calendar_url = https://<username>:<password>@url.to/your/calendar

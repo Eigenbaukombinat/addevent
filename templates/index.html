@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}">
+    <title>Eigenbaukombinat Event Formular</title>
+  </head>
+
+  <body>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="mt-5">Neue Veranstaltung anlegen</h1>
+          <p class="lead">Mit diesem Formular können einmalige Veranstaltungen angelegt werden.</p>
+          <p class="text-muted">Änderungen an / neue regelmäßige Veranstaltungen bitte per Mail an veranstaltungen@eigenbaukombinat.de melden!</p>
+  	      
+          {% for error in errors %}
+             <div class="alert alert-danger" role="alert">{{ error }}</div>
+          {% endfor %}
+
+          <form action="/addevent" method="post">
+  			  <div class="form-group">
+  			    <label for="titel" class="font-weight-bold">Titel der Veranstaltung</label>
+  			    <input name="title" type="text" class="form-control" id="titel" placeholder="" value="{{ title }}" autofocus>
+  			  </div>
+          
+
+          <div class="form-group">
+              <label for="datetimepicker6">Beginn</label>
+              <div class='input-group date' id='datetimepicker6'>
+                  <input name="start" type='text' class="form-control" placeholder="DD.MM.YYYY HH:MM" value="{{ start }}"/>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="datetimepicker7">Ende</label>
+              <div class='input-group date' id='datetimepicker7'>
+                  <input name="end" type='text' class="form-control"  placeholder="DD.MM.YYYY HH:MM" value="{{ end }}"/>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold">Soll die Veranstaltung auf der Website erscheinen?</label>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="public" id="is_pub" value="true" checked>
+                Ja
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="public" id="is_not_pub" value="false">
+                Nein
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="desc" id="desclabel">URL zur Veranstaltung (optional)</label>
+            <p id="descforprivate" style="display:none" class="text-muted">Bei Veranstaltungen die nicht auf der Webseite erscheinen, hier
+            ein paar Infos einfügen: Wer kümmert sich, wieviele Leute, welche Räume werden benutzt.</p>
+            <p id="descforpublic" class="text-muted">Die URL kann entweder auf eine Unterseite von eigenbaukombinat.de oder aber
+            eine externe Webseite verweisen.</p>
+            <input name="desc" type="text" class="form-control" id="desc_field" value="{{ desc }}">
+          </div>
+			    <button type="submit" class="btn btn-primary">Abschicken</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+	<script src="{{ url_for('static',filename='js/jquery-3.2.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/moment.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/locale/de.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('input[name=public]').change(
+            function(ev) {
+              if ($(ev.target).val() == 'true') {
+                $('#descforprivate').hide();
+                $('#descforpublic').show();
+                $('#desclabel').text('URL zur Veranstaltung (optional)');
+              } else {
+                $('#descforprivate').show();
+                $('#descforpublic').hide();
+                $('#desclabel').text('Infos zur Veranstaltung');
+              }
+            });
+
+        $('#datetimepicker6').datetimepicker({
+          stepping: 10,
+          locale: 'de'
+        });
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false,  //Important! See issue #1075
+            stepping: 10,
+            locale: 'de'
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+
+    });
+
+
+  </script>
+
+
+
+  </body>
+
+</html>
