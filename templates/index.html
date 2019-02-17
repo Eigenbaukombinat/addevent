@@ -25,7 +25,7 @@
              <div class="alert alert-danger" role="alert">{{ error }}</div>
           {% endfor %}
 
-          <form action="/addevent" method="post">
+          <form action="addevent" method="post">
   			  <div class="form-group">
   			    <label for="titel" class="font-weight-bold">Titel der Veranstaltung</label>
   			    <input name="title" type="text" class="form-control" id="titel" placeholder="" value="{{ title }}" autofocus>
@@ -73,7 +73,7 @@
             eine externe Webseite verweisen.</p>
             <input name="desc" type="text" class="form-control" id="desc_field" value="{{ desc }}">
           </div>
-			    <button type="submit" class="btn btn-primary">Abschicken</button>
+    <button type="submit" class="btn btn-primary">Abschicken</button>
           </form>
         </div>
       </div>

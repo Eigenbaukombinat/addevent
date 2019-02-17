@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, make_response
 from datetime import datetime
 
 app = Flask("calwebadd")
-APPROOT = '/'
 
 
 class ReverseProxied(object):
@@ -43,8 +42,7 @@ def index():
         start='',
         end='',
         desc='',
-        errors=[],
-        approot=APPROOT)
+        errors=[])
 
 
 @app.route('/addevent', methods=['POST'])
@@ -81,7 +79,6 @@ def addevent():
             public_b)
         return render_template(
             'thx.html',
-            approot=APPROOT,
             evdata=ev.data)
     else:
         return render_template(
@@ -90,5 +87,4 @@ def addevent():
             title=title,
             start=start,
             end=end,
-            desc=desc,
-            approot=APPROOT)
+            desc=desc)
