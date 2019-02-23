@@ -19,7 +19,7 @@
         <div class="col-lg-12">
           <h1 class="mt-5">Neue Veranstaltung anlegen</h1>
           <p class="lead">Mit diesem Formular können einmalige Veranstaltungen angelegt werden.</p>
-          <p class="text-muted">Änderungen an / neue regelmäßige Veranstaltungen bitte per Mail an veranstaltungen@eigenbaukombinat.de melden!</p>
+          <p class="text-muted">Änderungen an bestehenden Veranstaltungen oder neue regelmäßige Veranstaltungen bitte per Mail an veranstaltungen@eigenbaukombinat.de melden!</p>
   	      
           {% for error in errors %}
              <div class="alert alert-danger" role="alert">{{ error }}</div>
@@ -51,7 +51,7 @@
               </div>
           </div>
           <div class="form-group">
-            <label class="font-weight-bold">Soll die Veranstaltung auf der Website erscheinen?</label>
+            <label class="font-weight-bold">Soll die Veranstaltung in der Terminliste auf der Website erscheinen?</label>
             <div class="form-check">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="public" id="is_pub" value="true" checked>
@@ -69,7 +69,7 @@
             <label class="font-weight-bold" for="desc" id="desclabel">URL zur Veranstaltung (optional)</label>
             <p id="descforprivate" style="display:none" class="text-muted">Bei Veranstaltungen die nicht auf der Webseite erscheinen, hier
             ein paar Infos einfügen: Wer kümmert sich, wieviele Leute, welche Räume werden benutzt.</p>
-            <p id="descforpublic" class="text-muted">Die URL kann entweder auf eine Unterseite von eigenbaukombinat.de oder aber
+            <p id="descforpublic" class="text-muted">Die URL auf die der Kalendereintrag auf der Website verweisen soll. Sie kann entweder auf eine Unterseite von eigenbaukombinat.de oder aber
             eine externe Webseite verweisen.</p>
             <input name="desc" type="text" class="form-control" id="desc_field" value="{{ desc }}">
           </div>
