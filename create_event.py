@@ -8,6 +8,7 @@ import uuid
 config = ConfigParser()
 config.read('config.ini')
 CALENDAR_URL = config['DEFAULT']['calendar_url']
+CALENDAR_UUID = config['DEFAULT']['calendar_uuid']
 
 VCAL_TEMPLATE = """BEGIN:VCALENDAR
 VERSION:2.0
@@ -58,12 +59,10 @@ def add_event(title, start, end, description='', public=True):
     principal = client.principal()
     calendars = principal.calendars()
 
-
-    if len(calendars) != 1:
-        print("Not exaclty one calendar found.")
-        sys.exit(0)
-
-    calendar = calendars[0]
+    for calendar in calendars:
+        if CALENDAR_UUID in str(calendar.url):
+            break
+    
     vcal = VCAL_TEMPLATE.format(
         uuid=uuid.uuid4(),
         timestamp=tfmt(datetime.now()),

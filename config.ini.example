@@ -1,2 +1,4 @@
 [DEFAULT]
 calendar_url = https://<username>:<password>@url.to/your/calendar
+# identifier of your calendar
+calendar_uuid = calender
