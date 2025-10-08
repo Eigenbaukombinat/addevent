@@ -1,2 +1,2 @@
-caldav==0.5.0
-flask==1.0.2
+flask==3.1.2
+caldav==2.0.1
